@@ -1,6 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 
-const ShoppingEdit = () => {
+const ShoppingEdit = (props) => {
+  // const [name, setName] = useState();
+  const [ings, setIngs] = useState({ name: "", amount: "" });
+  const setIngredients = (event) => {
+    event.persist();
+    setIngs((ings) => ({ ...ings, [event.target.name]: event.target.value }));
+  };
+
+  const addIngredients = (event) => {
+    event.preventDefault();
+    props.addIngredients(ings);
+  };
   return (
     <div className="row">
       <div className="col-12">
@@ -8,16 +19,30 @@ const ShoppingEdit = () => {
           <div className="row">
             <div className="col-sm-5 form-group">
               <label htmlFor="name">Name</label>
-              <input type="text" id="name" className="form-control" />
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={ings.name}
+                className="form-control"
+                onChange={setIngredients}
+              />
             </div>
             <div className="col-sm-2 form-group">
               <label htmlFor="amount">Amount</label>
-              <input type="number" id="amount" className="form-control" />
+              <input
+                type="number"
+                id="amount"
+                value={ings.amount}
+                name="amount"
+                className="form-control"
+                onChange={setIngredients}
+              />
             </div>
           </div>
           <div className="row">
             <div className="col-12">
-              <button className="btn btn-success" type="submit">
+              <button className="btn btn-success" onClick={addIngredients}>
                 Add
               </button>
               <button className="btn btn-danger" type="button">

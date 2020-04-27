@@ -1,41 +1,63 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const recipeDetail = () => {
+const RecipeDetail = (props) => {
   return (
     <React.Fragment>
       <div className="row">
         <div className="col-12">
-          <img src="" alt="" className="img-responsive" />
+          <img
+            src={props.recipe.imagePath}
+            alt={props.recipe.imagePath}
+            className="img-responsive"
+            style={{ maxHeight: "200px" }}
+          />
         </div>
       </div>
       <div className="row">
         <div className="col-12">
-          <h1>Recipe Name</h1>
+          <h1>{props.recipe.name}</h1>
         </div>
       </div>
       <div className="row">
         <div className="col-12">
-          <div className="btn-group">
+          <div className="dropdown">
+            <button
+              type="button"
+              className="btn btn-primary dropdown-toggle"
+              data-toggle="dropdown"
+            >
+              Dropdown button
+            </button>
+            <div className="dropdown-menu">
+              <Link to="/" className="dropdown-item">
+                To Shopping List
+              </Link>
+              <Link to="/" className="dropdown-item">
+                Edit Recipe
+              </Link>
+              <Link to="/" className="dropdown-item">
+                Delete Recipe
+              </Link>
+            </div>
+          </div>
+          {/* <div className="btn-group open">
             <button type="button" className="btn btn-primary dropdown-toggle">
               Manage Recipe <span className="caret"></span>
             </button>
             <ul className="dropdown-menu">
               <li>
-                <Link to="/">To Shopping List</Link>
               </li>
               <li>
-                <Link to="/">Edit Recipe</Link>
               </li>
               <li>
-                <Link to="/">Delete Recipe</Link>
               </li>
             </ul>
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="row">
-        <div className="col-12">Description</div>
+        <div className="col-12">{props.recipe.description}</div>
       </div>
       <div className="row">
         <div className="col-12">Ingredients</div>
@@ -44,4 +66,4 @@ const recipeDetail = () => {
   );
 };
 
-export default recipeDetail;
+export default RecipeDetail;

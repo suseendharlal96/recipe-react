@@ -5,10 +5,10 @@ import NavigationItem from "./NavigationItem/NavigationItem";
 
 const navigationItems = (props) => (
   <ul className={styles.NavigationItems}>
-    <NavigationItem link="/" exact>
+    {/* <NavigationItem link="/" exact>
       Recipe Book
-    </NavigationItem>
-    <NavigationItem link="/recipes" exact>
+    </NavigationItem> */}
+    <NavigationItem link="/" exact>
       Recipes
     </NavigationItem>
     <NavigationItem link="/shopping" exact>

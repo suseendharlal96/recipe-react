@@ -9,6 +9,11 @@ const ShoppingList = () => {
     { name: "egg", amount: 21 },
     { name: "chicken", amount: 21 },
   ]);
+
+  const addIngredientsHandler = (data) => {
+    console.log(data);
+    setIngs(ings.concat(data));
+  };
   let ingredients = (
     <React.Fragment>
       {ings.map((data, index) => {
@@ -28,7 +33,7 @@ const ShoppingList = () => {
   return (
     <div className="row">
       <div className="col-10">
-        <ShoppingEdit />
+        <ShoppingEdit addIngredients={addIngredientsHandler} />
         <hr />
         <ul className="list-group">{ingredients}</ul>
       </div>

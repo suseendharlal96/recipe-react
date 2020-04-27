@@ -1,10 +1,10 @@
 import React, { Fragment } from "react";
 
 import "./App.css";
-// import Header from "./component/Header/Header";
 import Recipes from "./containers/Recipes/Recipes";
 import ShoppingList from "./containers/ShoppingList/ShoppingList";
 import Layout from "./component/Layout/Layout";
+import { Route } from "react-router-dom";
 
 function App() {
   return (
@@ -13,8 +13,8 @@ function App() {
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              <Recipes />
-              <ShoppingList />
+              <Route path="/" exact component={Recipes} />
+              <Route path="/shopping" component={ShoppingList} />
             </div>
           </div>
         </div>

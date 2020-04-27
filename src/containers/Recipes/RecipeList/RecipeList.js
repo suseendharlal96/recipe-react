@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import RecipeItem from "./RecipeItem/RecipeItem";
 import { Link } from "react-router-dom";
 
-const RecipeList = () => {
+const RecipeList = (props) => {
   const [recipes, setRecipes] = useState([
     {
       name: "recipe",
@@ -11,25 +11,25 @@ const RecipeList = () => {
       imagePath:
         "https://upload.wikimedia.org/wikipedia/commons/1/15/Recipe_logo.jpeg",
     },
+    {
+      name: "recipe2",
+      description: "good one2",
+      imagePath:
+        "https://upload.wikimedia.org/wikipedia/commons/1/15/Recipe_logo.jpeg",
+    },
   ]);
+
   let recipe = (
     <React.Fragment>
       {recipes.map((data, index) => {
         return (
-          <React.Fragment key={index}>
-            <div className="float-left">
-              <h4 className="list-group-item-heading"> {data.name} </h4>
-              <p className="list-group-item-text"> {data.description} </p>
-            </div>
-            <span className="float-right">
-              <img
-                src={data.imagePath}
-                alt={data.name}
-                className="img-responsive"
-                style={{ maxHeight: "50px" }}
-              />
-            </span>
-          </React.Fragment>
+          <RecipeItem
+            selected={() => props.selectRecipe(data)}
+            key={index}
+            name={data.name}
+            description={data.description}
+            image={data.imagePath}
+          />
         );
       })}
     </React.Fragment>
@@ -43,14 +43,7 @@ const RecipeList = () => {
         </div>
       </div>
       <hr />
-      <div className="row">
-        <div className="col-12">
-          <Link to="/details" className="list-group-item clearfix">
-            {recipe}
-          </Link>
-          <RecipeItem />
-        </div>
-      </div>
+      {recipe}
     </React.Fragment>
   );
 };
