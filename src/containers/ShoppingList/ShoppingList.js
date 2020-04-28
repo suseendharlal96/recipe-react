@@ -1,22 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import * as action from "../../store/actions/index";
 
 import ShoppingEdit from "./ShoppingEdit/ShoppingEdit";
 
-const ShoppingList = () => {
-  const [ings, setIngs] = useState([
-    { name: "meat", amount: 21 },
-    { name: "egg", amount: 21 },
-    { name: "chicken", amount: 21 },
-  ]);
+const ShoppingList = (props) => {
+  // useEffect(()=>{
+
+  // })
 
   const addIngredientsHandler = (data) => {
-    console.log(data);
-    setIngs(ings.concat(data));
+    props.addIngredient(data);
   };
+
   let ingredients = (
     <React.Fragment>
-      {ings.map((data, index) => {
+      {props.ingredients.map((data, index) => {
         return (
           <Link
             to="/"
@@ -33,7 +33,7 @@ const ShoppingList = () => {
   return (
     <div className="row">
       <div className="col-10">
-        <ShoppingEdit addIngredients={addIngredientsHandler} />
+        <ShoppingEdit addIngredients={(data) => addIngredientsHandler(data)} />
         <hr />
         <ul className="list-group">{ingredients}</ul>
       </div>
@@ -41,4 +41,16 @@ const ShoppingList = () => {
   );
 };
 
-export default ShoppingList;
+const mapStateToProps = (state) => {
+  return {
+    ingredients: state.shopReducer.ingredients,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addIngredient: (data) => dispatch(action.addIngredient(data)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ShoppingList);

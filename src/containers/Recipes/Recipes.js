@@ -1,33 +1,52 @@
 import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
 
+import * as action from "../../store/actions/index";
 import RecipeList from "./RecipeList/RecipeList";
 import RecipeDetail from "./RecipeDetail/RecipeDetail";
 
 const Recipes = (props) => {
-  const [recipeDetail, setRecipeDetail] = useState(null);
-
   useEffect(() => {
     console.log(props);
   }, []);
 
-  const setDetailHandler = (data) => {
+  const addToShoppingHandler = (data) => {
     console.log(data);
-    setRecipeDetail(data);
+    props.addToShopping(data);
   };
 
   let recipeDetailComponent = <p>Please select a recipe!</p>;
-  if (recipeDetail) {
-    recipeDetailComponent = <RecipeDetail recipe={recipeDetail} />;
+  if (props.recipeDetail) {
+    recipeDetailComponent = (
+      <RecipeDetail
+        recipe={props.recipeDetail}
+        addToShopping={() =>
+          addToShoppingHandler(props.recipeDetail.ingredients)
+        }
+      />
+    );
   }
 
   return (
     <div className="row">
       <div className="col-md-6">
-        <RecipeList {...props} selectRecipe={setDetailHandler} />
+        <RecipeList {...props} />
       </div>
       <div className="col-md-6">{recipeDetailComponent}</div>
     </div>
   );
 };
 
-export default Recipes;
+const mapStateToProps = (state) => {
+  return {
+    recipeDetail: state.recipeReducer.selectedRecipe,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addToShopping: (data) => dispatch(action.addToShopList(data)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Recipes);

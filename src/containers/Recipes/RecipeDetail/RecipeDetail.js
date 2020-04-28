@@ -30,37 +30,38 @@ const RecipeDetail = (props) => {
               Dropdown button
             </button>
             <div className="dropdown-menu">
-              <Link to="/" className="dropdown-item">
-                To Shopping List
-              </Link>
-              <Link to="/" className="dropdown-item">
+              <div
+                className="dropdown-item"
+                style={{ cursor: "pointer" }}
+                onClick={props.addToShopping}
+              >
+                To shopping List
+              </div>
+              <div className="dropdown-item" style={{ cursor: "pointer" }}>
                 Edit Recipe
-              </Link>
-              <Link to="/" className="dropdown-item">
+              </div>
+              <div className="dropdown-item" style={{ cursor: "pointer" }}>
                 Delete Recipe
-              </Link>
+              </div>
             </div>
           </div>
-          {/* <div className="btn-group open">
-            <button type="button" className="btn btn-primary dropdown-toggle">
-              Manage Recipe <span className="caret"></span>
-            </button>
-            <ul className="dropdown-menu">
-              <li>
-              </li>
-              <li>
-              </li>
-              <li>
-              </li>
-            </ul>
-          </div> */}
         </div>
       </div>
       <div className="row">
         <div className="col-12">{props.recipe.description}</div>
       </div>
       <div className="row">
-        <div className="col-12">Ingredients</div>
+        <div className="col-12">
+          <ul className="list-group">
+            {props.recipe.ingredients.map((ing, index) => {
+              return (
+                <li key={index} className="list-group-item">
+                  {ing.name} - {ing.quantity}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       </div>
     </React.Fragment>
   );

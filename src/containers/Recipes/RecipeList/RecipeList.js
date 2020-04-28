@@ -1,32 +1,19 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 
+import * as action from "../../../store/actions/index";
 import RecipeItem from "./RecipeItem/RecipeItem";
-import { Link } from "react-router-dom";
 
 const RecipeList = (props) => {
-  const [recipes, setRecipes] = useState([
-    {
-      name: "recipe",
-      description: "good one",
-      imagePath:
-        "https://upload.wikimedia.org/wikipedia/commons/1/15/Recipe_logo.jpeg",
-    },
-    {
-      name: "recipe2",
-      description: "good one2",
-      imagePath:
-        "https://upload.wikimedia.org/wikipedia/commons/1/15/Recipe_logo.jpeg",
-    },
-  ]);
-
   let recipe = (
     <React.Fragment>
-      {recipes.map((data, index) => {
+      {props.recipes.map((data, index) => {
         return (
           <RecipeItem
-            selected={() => props.selectRecipe(data)}
+            selected={() => props.selectedRecipe(data.id)}
             key={index}
             name={data.name}
+            ingredients={data.ingredients}
             description={data.description}
             image={data.imagePath}
           />
@@ -48,4 +35,16 @@ const RecipeList = (props) => {
   );
 };
 
-export default RecipeList;
+const mapStateToProps = (state) => {
+  return {
+    recipes: state.recipeReducer.recipe,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    selectedRecipe: (key) => dispatch(action.selectedRecipes(key)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(RecipeList);
