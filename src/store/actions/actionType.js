@@ -1,5 +1,6 @@
 export const GET_INGREDIENTS = " GET_INGREDIENTS";
 export const ADD_INGREDIENT = " ADD_INGREDIENT";
+export const EDIT_INGREDIENT = " EDIT_INGREDIENT";
 export const ADD_TO_SHOPLIST = " ADD_TO_SHOPLIST";
 
 export const GET_RECIPES = " GET_RECIPES";

@@ -13,6 +13,14 @@ export const addIngredient = (ing) => {
   };
 };
 
+export const editIngredient = (ing, index) => {
+  return {
+    type: actions.EDIT_INGREDIENT,
+    ingredient: ing,
+    index: index,
+  };
+};
+
 export const addToShopList = (data) => {
   console.log("data", data);
   return {

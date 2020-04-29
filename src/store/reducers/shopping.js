@@ -15,6 +15,18 @@ const shopReducer = (state = initState, action) => {
         ...state,
         ingredients: state.ingredients.concat(a),
       };
+    case actionType.EDIT_INGREDIENT:
+      const editData = action.ingredient;
+      console.log(action.index);
+      const copy = { ...state };
+      copy.ingredients[action.index] = editData;
+      console.log(copy);
+      return {
+        ...state,
+        ingredients: state.ingredients.map((data, i) =>
+          i === action.index ? action.ingredient : data
+        ),
+      };
     case actionType.ADD_TO_SHOPLIST:
       let arr = [];
       action.list.forEach((data) => {
