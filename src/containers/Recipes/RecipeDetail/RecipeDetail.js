@@ -1,14 +1,31 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
 
 const RecipeDetail = (props) => {
-  return (
+  const [detailed, setData] = useState({});
+  useEffect(() => {
+    if (props.match.params.id) {
+      let obj = {};
+      props.recipes.find((data, index) => {
+        if (index === +props.match.params.id) {
+          obj = data;
+        }
+        setData(obj);
+      });
+    }
+  }, [props, detailed]);
+
+  const navigateEdit = () => {
+    props.history.push(`/recipe/${props.match.params.id}/edit`);
+  };
+
+  let detailComponent = (
     <React.Fragment>
       <div className="row">
         <div className="col-12">
           <img
-            src={props.recipe.imagePath}
-            alt={props.recipe.imagePath}
+            src={detailed && detailed.imagePath ? detailed.imagePath : "image"}
+            alt={detailed && detailed.imagePath ? detailed.imagePath : "image"}
             className="img-responsive"
             style={{ maxHeight: "200px" }}
           />
@@ -16,7 +33,7 @@ const RecipeDetail = (props) => {
       </div>
       <div className="row">
         <div className="col-12">
-          <h1>{props.recipe.name}</h1>
+          <h1>{detailed && detailed.name ? detailed.name : null}</h1>
         </div>
       </div>
       <div className="row">
@@ -27,17 +44,21 @@ const RecipeDetail = (props) => {
               className="btn btn-primary dropdown-toggle"
               data-toggle="dropdown"
             >
-              Dropdown button
+              Manage Recipe
             </button>
             <div className="dropdown-menu">
               <div
                 className="dropdown-item"
                 style={{ cursor: "pointer" }}
-                onClick={props.addToShopping}
+                onClick={() => props.addToShopping(detailed.ingredients)}
               >
                 To shopping List
               </div>
-              <div className="dropdown-item" style={{ cursor: "pointer" }}>
+              <div
+                className="dropdown-item"
+                onClick={navigateEdit}
+                style={{ cursor: "pointer" }}
+              >
                 Edit Recipe
               </div>
               <div className="dropdown-item" style={{ cursor: "pointer" }}>
@@ -48,23 +69,35 @@ const RecipeDetail = (props) => {
         </div>
       </div>
       <div className="row">
-        <div className="col-12">{props.recipe.description}</div>
+        <div className="col-12">
+          {detailed && detailed.description ? detailed.description : null}
+        </div>
       </div>
       <div className="row">
         <div className="col-12">
           <ul className="list-group">
-            {props.recipe.ingredients.map((ing, index) => {
-              return (
-                <li key={index} className="list-group-item">
-                  {ing.name} - {ing.quantity}
-                </li>
-              );
-            })}
+            {detailed && detailed.ingredients
+              ? detailed.ingredients.map((ing, index) => {
+                  return (
+                    <li key={index} className="list-group-item">
+                      {ing.name} - {ing.quantity}
+                    </li>
+                  );
+                })
+              : null}
           </ul>
         </div>
       </div>
     </React.Fragment>
   );
+
+  return <div>{detailComponent}</div>;
 };
 
-export default RecipeDetail;
+const mapStateToProps = (state) => {
+  return {
+    recipes: state.recipeReducer.recipe,
+  };
+};
+
+export default connect(mapStateToProps)(RecipeDetail);

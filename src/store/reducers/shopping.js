@@ -17,15 +17,14 @@ const shopReducer = (state = initState, action) => {
       };
     case actionType.ADD_TO_SHOPLIST:
       let arr = [];
-      action.list.map((data) => {
-        for (let i = 0; i < 1; i++) {
-          arr.push({
-            name: data["name"],
-            amount: data["quantity"],
-            price: data["price"],
-          });
-        }
+      action.list.forEach((data) => {
+        arr.push({
+          name: data["name"],
+          amount: data["quantity"],
+          price: data["price"],
+        });
       });
+      console.log(arr);
       return {
         ...state,
         ingredients: state.ingredients.concat(arr),

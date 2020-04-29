@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import * as action from "../../store/actions/index";
@@ -6,9 +6,9 @@ import * as action from "../../store/actions/index";
 import ShoppingEdit from "./ShoppingEdit/ShoppingEdit";
 
 const ShoppingList = (props) => {
-  // useEffect(()=>{
-
-  // })
+  useEffect(() => {
+    console.log(props.ingredients);
+  }, []);
 
   const addIngredientsHandler = (data) => {
     props.addIngredient(data);

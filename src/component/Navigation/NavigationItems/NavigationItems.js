@@ -8,7 +8,7 @@ const navigationItems = (props) => (
     {/* <NavigationItem link="/" exact>
       Recipe Book
     </NavigationItem> */}
-    <NavigationItem link="/" exact>
+    <NavigationItem link="/recipe">
       Recipes
     </NavigationItem>
     <NavigationItem link="/shopping" exact>

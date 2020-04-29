@@ -1,22 +1,47 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
 import * as action from "../../../store/actions/index";
 import RecipeItem from "./RecipeItem/RecipeItem";
 
 const RecipeList = (props) => {
+  const [active, setActive] = useState(false);
+  useEffect(() => {
+    console.log(props);
+  }, []);
+
+  const selectedHandler = (id) => {
+    setActive(id);
+  };
+
+  const IsActive = (id, props) => {
+    console.log("id", id);
+    console.log(props);
+    return active === id;
+  };
+
+  const navigate = () => {
+    props.history.push("/recipe/new");
+    setActive(false);
+  };
+
   let recipe = (
     <React.Fragment>
       {props.recipes.map((data, index) => {
         return (
-          <RecipeItem
-            selected={() => props.selectedRecipe(data.id)}
-            key={index}
-            name={data.name}
-            ingredients={data.ingredients}
-            description={data.description}
-            image={data.imagePath}
-          />
+          <React.Fragment key={index}>
+            <RecipeItem
+              {...props}
+              index={index}
+              id={data.id}
+              selected={(id) => selectedHandler(id)}
+              isActive={IsActive(data.id, props)}
+              name={data.name}
+              ingredients={data.ingredients}
+              description={data.description}
+              image={data.imagePath}
+            />
+          </React.Fragment>
         );
       })}
     </React.Fragment>
@@ -26,7 +51,9 @@ const RecipeList = (props) => {
     <React.Fragment>
       <div className="row">
         <div className="col-12">
-          <button className="btn btn-success">New Recipe</button>
+          <button className="btn btn-success" onClick={navigate}>
+            New Recipe
+          </button>
         </div>
       </div>
       <hr />
