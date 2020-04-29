@@ -82,6 +82,11 @@ const ShoppingEdit = (props) => {
     props.clearForm();
   };
 
+  const deleteData = () => {
+    props.deleteIngredient(editIndex);
+    clearForm();
+  };
+
   const checkValidity = (value, rules) => {
     console.log(12);
     let isValid = true;
@@ -171,9 +176,14 @@ const ShoppingEdit = (props) => {
           </button>
           <button
             className="btn btn-danger"
-            disabled={!formIsValid}
-            style={{ marginRight: "5px" }}
+            disabled={editIndex >= 0 && editIndex !== null ? false : true}
+            style={
+              editIndex >= 0 && editIndex !== null
+                ? { cursor: "pointer", marginRight: "5px" }
+                : { cursor: "no-drop", marginRight: "5px" }
+            }
             type="button"
+            onClick={deleteData}
           >
             Delete
           </button>

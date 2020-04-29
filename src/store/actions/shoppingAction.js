@@ -21,6 +21,13 @@ export const editIngredient = (ing, index) => {
   };
 };
 
+export const deleteIngredient = (index) => {
+  return {
+    type: actions.DELETE_INGREDIENT,
+    index: index,
+  };
+};
+
 export const addToShopList = (data) => {
   console.log("data", data);
   return {

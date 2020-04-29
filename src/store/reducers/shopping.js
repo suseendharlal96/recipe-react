@@ -16,16 +16,19 @@ const shopReducer = (state = initState, action) => {
         ingredients: state.ingredients.concat(a),
       };
     case actionType.EDIT_INGREDIENT:
-      const editData = action.ingredient;
-      console.log(action.index);
-      const copy = { ...state };
-      copy.ingredients[action.index] = editData;
-      console.log(copy);
       return {
         ...state,
         ingredients: state.ingredients.map((data, i) =>
           i === action.index ? action.ingredient : data
         ),
+      };
+    case actionType.DELETE_INGREDIENT:
+      console.log(action.index);
+      const updated = state.ingredients.filter((data, i) => i !== action.index);
+      console.log(updated);
+      return {
+        ...state,
+        ingredients: updated,
       };
     case actionType.ADD_TO_SHOPLIST:
       let arr = [];

@@ -22,6 +22,10 @@ const ShoppingList = (props) => {
     props.editIngredient(data, index);
   };
 
+  const deleteIngredientHandler = (index) => {
+    props.deleteIngredient(index);
+  };
+
   const selectedRecipe = (data, index) => {
     const obj = { ...data, index: index };
     setselectedRecipe(obj);
@@ -61,8 +65,9 @@ const ShoppingList = (props) => {
         <ShoppingEdit
           selectedRecipe={recipe}
           clearForm={clearShopForm}
-          editIngredient={(data, index) => editIngredientHandler(data, index)}
           addIngredients={(data) => addIngredientsHandler(data)}
+          editIngredient={(data, index) => editIngredientHandler(data, index)}
+          deleteIngredient={(index) => deleteIngredientHandler(index)}
         />
         <hr />
         <ul className="list-group">{ingredients}</ul>
@@ -82,6 +87,7 @@ const mapDispatchToProps = (dispatch) => {
     addIngredient: (data) => dispatch(action.addIngredient(data)),
     editIngredient: (data, index) =>
       dispatch(action.editIngredient(data, index)),
+    deleteIngredient: (data) => dispatch(action.deleteIngredient(data)),
   };
 };
 
