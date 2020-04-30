@@ -15,8 +15,7 @@ const RecipeList = (props) => {
   };
 
   const IsActive = (id, props) => {
-    console.log("id", id);
-    console.log(props);
+    // console.log(props);
     return active === id;
   };
 

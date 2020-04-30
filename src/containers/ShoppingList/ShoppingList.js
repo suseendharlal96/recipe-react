@@ -10,7 +10,7 @@ const ShoppingList = (props) => {
 
   useEffect(() => {
     console.log(props.ingredients);
-  }, [props.ingredients]);
+  }, []);
 
   const addIngredientsHandler = (data) => {
     let obj = { ...data, price: 100 };

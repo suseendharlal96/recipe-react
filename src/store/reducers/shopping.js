@@ -23,9 +23,7 @@ const shopReducer = (state = initState, action) => {
         ),
       };
     case actionType.DELETE_INGREDIENT:
-      console.log(action.index);
       const updated = state.ingredients.filter((data, i) => i !== action.index);
-      console.log(updated);
       return {
         ...state,
         ingredients: updated,
