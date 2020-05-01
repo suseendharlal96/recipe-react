@@ -156,6 +156,14 @@ const RecipeEdit = (props) => {
     setformIsValid(formIsValid);
   };
 
+  const cancelData = () => {
+    if (editIndex >= 0 && editIndex !== null) {
+      props.history.goBack();
+    } else {
+      props.history.push("/recipe");
+    }
+  };
+
   const checkValidity = (value, rules) => {
     console.log(12, value, rules);
     let isValid = true;
@@ -253,6 +261,7 @@ const RecipeEdit = (props) => {
       console.log("add");
       props.addRecipe(recipeObj);
     }
+    props.history.push("/recipe");
   };
 
   let editComponent = (
@@ -270,18 +279,8 @@ const RecipeEdit = (props) => {
           >
             {editIndex !== null ? "Update" : "Add"}
           </button>
-          <button
-            className="btn btn-danger"
-            disabled={editIndex >= 0 && editIndex !== null ? false : true}
-            style={
-              editIndex >= 0 && editIndex !== null
-                ? { cursor: "pointer", marginRight: "5px" }
-                : { cursor: "no-drop", marginRight: "5px" }
-            }
-            type="button"
-            // onClick={deleteData}
-          >
-            Delete
+          <button className="btn btn-danger" type="button" onClick={cancelData}>
+            Cancel
           </button>
         </div>
       </div>

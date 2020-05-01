@@ -48,7 +48,11 @@ const recipeReducer = (state = initState, action) => {
           index === action.index ? action.recipeData : recp
         ),
       };
-      break;
+    case actionType.DELETE_RECIPE:
+      return {
+        ...state,
+        recipe: state.recipe.filter((data, index) => index !== action.delIndex),
+      };
     default:
       return state;
   }

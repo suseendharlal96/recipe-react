@@ -27,3 +27,10 @@ export const editRecipe = (index, data) => {
     index: index,
   };
 };
+
+export const deleteRecipe = (index) => {
+  return {
+    type: action.DELETE_RECIPE,
+    delIndex: index,
+  };
+};

@@ -57,6 +57,11 @@ const Recipes = (props) => {
     props.editRecipe(index, a);
   };
 
+  const deleteRecipeHandler = (index) => {
+    props.deleteRecipe(index);
+    props.history.push("/recipe");
+  };
+
   let recipeDetailComponent = (
     <Switch>
       <Route
@@ -79,6 +84,7 @@ const Recipes = (props) => {
         render={(props) => (
           <RecipeDetail
             {...props}
+            deleteRecipe={(index) => deleteRecipeHandler(index)}
             addToShopping={(data) => addToShoppingHandler(data)}
           />
         )}
@@ -102,6 +108,7 @@ const mapDispatchToProps = (dispatch) => {
     addToShopping: (data) => dispatch(action.addToShopList(data)),
     addRecipe: (data) => dispatch(action.addRecipe(data)),
     editRecipe: (index, data) => dispatch(action.editRecipe(index, data)),
+    deleteRecipe: (index) => dispatch(action.deleteRecipe(index)),
   };
 };
 

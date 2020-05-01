@@ -61,7 +61,11 @@ const RecipeDetail = (props) => {
               >
                 Edit Recipe
               </div>
-              <div className="dropdown-item" style={{ cursor: "pointer" }}>
+              <div
+                className="dropdown-item"
+                onClick={() => props.deleteRecipe(+props.match.params.id)}
+                style={{ cursor: "pointer" }}
+              >
                 Delete Recipe
               </div>
             </div>
