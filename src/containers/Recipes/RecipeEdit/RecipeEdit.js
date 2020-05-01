@@ -325,7 +325,7 @@ const RecipeEdit = (props) => {
                     style={{ marginTop: "10px" }}
                     className="row"
                   >
-                    <div className="col-8">
+                    <div className="col-7">
                       <input
                         type="text"
                         value={ings.name.value}
@@ -346,7 +346,7 @@ const RecipeEdit = (props) => {
                         }
                       />
                     </div>
-                    <div className="col-2">
+                    <div className="col-3">
                       <input
                         type="number"
                         value={ings.amount.value}
