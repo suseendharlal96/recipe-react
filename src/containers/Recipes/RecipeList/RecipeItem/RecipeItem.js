@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 
 const RecipeItem = (props) => {
   // const [active, setActive] = useState("list-group-item clearfix");

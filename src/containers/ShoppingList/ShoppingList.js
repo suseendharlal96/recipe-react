@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import * as action from "../../store/actions/index";
 
@@ -7,10 +7,6 @@ import ShoppingEdit from "./ShoppingEdit/ShoppingEdit";
 const ShoppingList = (props) => {
   const [recipe, setselectedRecipe] = useState();
   const [activeIndex, setActiveIndex] = useState();
-
-  useEffect(() => {
-    console.log(props.ingredients);
-  }, []);
 
   const addIngredientsHandler = (data) => {
     let obj = { ...data, price: 100 };
