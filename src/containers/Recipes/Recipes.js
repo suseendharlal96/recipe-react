@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 
 import * as action from "../../store/actions/index";
@@ -8,9 +8,7 @@ import RecipeEdit from "./RecipeEdit/RecipeEdit";
 import { Route, Switch } from "react-router-dom";
 
 const Recipes = (props) => {
-  useEffect(() => {
-    console.log(props);
-  }, []);
+ 
 
   const addToShoppingHandler = (data) => {
     console.log(data);

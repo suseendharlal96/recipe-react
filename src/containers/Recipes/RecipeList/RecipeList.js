@@ -9,7 +9,7 @@ const RecipeList = (props) => {
   useEffect(() => {
     console.log(props);
     const a = props.location.pathname.split("/")[2];
-    props.recipes.map((recipe, index) => {
+    props.recipes.forEach((recipe, index) => {
       if (+a === index) {
         setActive(recipe.id);
       }

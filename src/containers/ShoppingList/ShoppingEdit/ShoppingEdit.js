@@ -41,11 +41,21 @@ const ShoppingEdit = (props) => {
 
   const [formIsValid, setformIsValid] = useState(false);
   const [editIndex, setEditIndex] = useState(null);
-  const [clear, setClear] = useState(false);
 
   useEffect(() => {
-    editFormData(props.selectedRecipe);
+    // <editFo></editFo>rmData(props.selectedRecipe);
     console.log(21, props.selectedRecipe);
+    if (props.selectedRecipe) {
+      let obj = { ...orderForm };
+      for (let key in obj) {
+        obj[key].value = props.selectedRecipe[key];
+        obj[key].valid = true;
+      }
+      setOrderForm(obj);
+      setEditIndex(props.selectedRecipe.index);
+      console.log(editIndex);
+      setformIsValid(true);
+    }
   }, [props.selectedRecipe]);
 
   // useEffect(() => {
@@ -54,20 +64,9 @@ const ShoppingEdit = (props) => {
   //   }
   // }, [props]);
 
-  const editFormData = (data) => {
-    console.log(data);
-    if (data) {
-      let obj = { ...orderForm };
-      for (let key in obj) {
-        obj[key].value = data[key];
-        obj[key].valid = true;
-      }
-      setOrderForm(obj);
-      setEditIndex(data.index);
-      console.log(editIndex);
-      setformIsValid(true);
-    }
-  };
+  // const editFormData = (data) => {
+  //   console.log(data);
+  // };
 
   const clearForm = () => {
     let obj = { ...orderForm };
@@ -149,7 +148,6 @@ const ShoppingEdit = (props) => {
         return (
           <Input
             key={data.id}
-            label={data.id}
             elementType={data.inputData.elementType}
             elementConfig={data.inputData.elementConfig}
             value={data.inputData.value}
