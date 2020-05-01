@@ -59,29 +59,33 @@ const RecipeEdit = (props) => {
   useEffect(() => {
     console.log(props);
     if (props.location.pathname !== "/recipe/new") {
-      setEditIndex(+props.match.params.id);
       setEditForm(+props.match.params.id);
       // initIngredientForm();
     } else {
-      let obj = { ...orderForm };
-      for (let key in obj) {
-        obj[key].value = "";
-        obj[key].valid = "";
-        obj[key].touched = false;
-      }
-      setOrderForm(obj);
-      if (ingredients && ingredients.length) {
-        ingredients.length = 0;
-        setIngredients(ingredients);
-      }
-      setformIsValid(false);
-      if (editIndex >= 0 || editIndex !== null) {
-        setEditIndex(null);
-      }
+      setNewForm();
     }
   }, [props]);
 
+  const setNewForm = () => {
+    let obj = { ...orderForm };
+    for (let key in obj) {
+      obj[key].value = "";
+      obj[key].valid = "";
+      obj[key].touched = false;
+    }
+    setOrderForm(obj);
+    if (ingredients && ingredients.length) {
+      ingredients.length = 0;
+      setIngredients(ingredients);
+    }
+    setformIsValid(false);
+    if (editIndex >= 0 || editIndex !== null) {
+      setEditIndex(null);
+    }
+  };
+
   const setEditForm = (index) => {
+    setEditIndex(+index);
     let a = {};
     console.log(index);
     a = props.recipes.find((data, i) => i === index);
@@ -93,7 +97,7 @@ const RecipeEdit = (props) => {
         obj[key].valid = true;
       }
       const arr = [];
-      a["ingredients"].map((ings) => {
+      a["ingredients"].forEach((ings) => {
         arr.push({
           name: {
             value: ings["name"],
@@ -148,7 +152,7 @@ const RecipeEdit = (props) => {
     setIngredients(b);
     let formIsValid = true;
     if (b && b.length) {
-      b.map((ings, index) => {
+      b.forEach((ings, index) => {
         console.log(ings);
         formIsValid = ings.name.valid && ings.amount.valid && formIsValid;
       });
@@ -198,7 +202,7 @@ const RecipeEdit = (props) => {
     }
     console.log(formIsValid);
     if (ingredients && ingredients.length) {
-      ingredients.map((ings, index) => {
+      ingredients.forEach((ings, index) => {
         formIsValid = ings.name.valid && ings.amount.valid && formIsValid;
       });
     }
@@ -217,7 +221,7 @@ const RecipeEdit = (props) => {
     ingCopy[index][field].touched = true;
     let formIsValid = true;
     if (ingredients && ingredients.length) {
-      ingredients.map((ings, index) => {
+      ingredients.forEach((ings, index) => {
         formIsValid = ings.name.valid && ings.amount.valid && formIsValid;
       });
     }
@@ -245,7 +249,7 @@ const RecipeEdit = (props) => {
       // recipeObj["ingredients"] = obj["ingredients"];
     }
     let ingredientsArr = [];
-    obj["ingCopy"].map((ings) => {
+    obj["ingCopy"].forEach((ings) => {
       ingredientsArr.push({
         name: ings["name"].value,
         quantity: ings["amount"].value,
@@ -303,6 +307,7 @@ const RecipeEdit = (props) => {
       <div className="row">
         <div className="col-12">
           <img
+            alt="recipe"
             src={orderForm.imagePath.value}
             style={{ maxHeight: "150px" }}
             className="img-responsive"

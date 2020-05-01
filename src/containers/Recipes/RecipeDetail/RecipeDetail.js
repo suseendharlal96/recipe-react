@@ -6,7 +6,7 @@ const RecipeDetail = (props) => {
   useEffect(() => {
     if (props.match.params.id) {
       let obj = {};
-      props.recipes.find((data, index) => {
+      props.recipes.forEach((data, index) => {
         if (index === +props.match.params.id) {
           obj = data;
         }

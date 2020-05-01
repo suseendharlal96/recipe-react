@@ -1,11 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import styles from "./RecipeInput.module.css";
 
 const RecipeInput = (props) => {
-  useEffect(() => {
-    console.log(props);
-  }, []);
 
   let inputElement = null;
   const inputClasses = [styles.InputElement];
