@@ -257,11 +257,12 @@ const RecipeEdit = (props) => {
     if (editIndex >= 0 && editIndex !== null) {
       console.log("edit");
       props.editRecipe(editIndex, recipeObj);
+      props.history.goBack();
     } else {
       console.log("add");
       props.addRecipe(recipeObj);
+      props.history.push("/recipe");
     }
-    props.history.push("/recipe");
   };
 
   let editComponent = (
