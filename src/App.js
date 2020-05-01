@@ -14,7 +14,7 @@ const App = () => {
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              <Route exact path="/" exact component={Home} />
+              <Route path="/" exact component={Home} />
               <Route path="/recipe" component={Recipes} />
               <Route path="/shopping" component={ShoppingList} />
             </div>

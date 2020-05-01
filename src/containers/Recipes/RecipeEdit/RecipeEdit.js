@@ -74,6 +74,10 @@ const RecipeEdit = (props) => {
         ingredients.length = 0;
         setIngredients(ingredients);
       }
+      setformIsValid(false);
+      if (editIndex >= 0 || editIndex !== null) {
+        setEditIndex(null);
+      }
     }
   }, [props]);
 
@@ -82,32 +86,36 @@ const RecipeEdit = (props) => {
     console.log(index);
     a = props.recipes.find((data, i) => i === index);
     console.log(a);
-    let obj = { ...orderForm };
-    for (let key in obj) {
-      obj[key].value = a[key];
-      obj[key].valid = true;
-    }
-    const arr = [];
-    a["ingredients"].map((ings) => {
-      arr.push({
-        name: {
-          value: ings["name"],
-          valid: true,
-          touched: true,
-          validation: { isRequired: true },
-        },
-        amount: {
-          value: ings["quantity"],
-          valid: true,
-          touched: true,
-          validation: { isRequired: true, pattern: true },
-        },
+    if (a) {
+      let obj = { ...orderForm };
+      for (let key in obj) {
+        obj[key].value = a[key];
+        obj[key].valid = true;
+      }
+      const arr = [];
+      a["ingredients"].map((ings) => {
+        arr.push({
+          name: {
+            value: ings["name"],
+            valid: true,
+            touched: true,
+            validation: { isRequired: true },
+          },
+          amount: {
+            value: +ings["quantity"],
+            valid: true,
+            touched: true,
+            validation: { isRequired: true, pattern: true },
+          },
+        });
       });
-    });
-    console.log(arr);
-    setOrderForm(obj);
-    setformIsValid(true);
-    setIngredients(arr);
+      console.log(arr);
+      setOrderForm(obj);
+      setformIsValid(true);
+      setIngredients(arr);
+    } else {
+      props.history.push("/recipe");
+    }
   };
 
   const onAddIngredient = () => {
@@ -216,6 +224,35 @@ const RecipeEdit = (props) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
+    console.log(orderForm);
+    const ingCopy = [...ingredients];
+    console.log(ingCopy);
+    const obj = { ...orderForm, ingCopy };
+    let recipeObj = {};
+    for (let key in obj) {
+      if (obj[key].value) {
+        recipeObj[key] = obj[key].value;
+      }
+      recipeObj["id"] = Math.random();
+      // recipeObj["ingredients"] = obj["ingredients"];
+    }
+    let ingredientsArr = [];
+    obj["ingCopy"].map((ings) => {
+      ingredientsArr.push({
+        name: ings["name"].value,
+        quantity: ings["amount"].value,
+      });
+    });
+    // const ingredients = ingredientsArr;
+    recipeObj = { ...recipeObj, ingredientsArr };
+    console.log(recipeObj);
+    if (editIndex >= 0 && editIndex !== null) {
+      console.log("edit");
+      props.editRecipe(editIndex, recipeObj);
+    } else {
+      console.log("add");
+      props.addRecipe(recipeObj);
+    }
   };
 
   let editComponent = (
@@ -250,9 +287,8 @@ const RecipeEdit = (props) => {
       </div>
       {formData.map((data) => {
         return (
-          <React.Fragment>
+          <React.Fragment key={data.id}>
             <RecipeInput
-              key={data.id}
               elementType={data.inputData.elementType}
               elementConfig={data.inputData.elementConfig}
               value={data.inputData.value}
@@ -265,12 +301,12 @@ const RecipeEdit = (props) => {
           </React.Fragment>
         );
       })}
-      <div class="row">
-        <div class="col-12">
+      <div className="row">
+        <div className="col-12">
           <img
             src={orderForm.imagePath.value}
             style={{ maxHeight: "150px" }}
-            class="img-responsive"
+            className="img-responsive"
           />
         </div>
       </div>

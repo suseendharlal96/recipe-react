@@ -4,4 +4,4 @@ export {
   deleteIngredient,
   addToShopList,
 } from "./shoppingAction";
-export { selectedRecipes } from "./recipeAction";
+export { selectedRecipes, addRecipe, editRecipe } from "./recipeAction";

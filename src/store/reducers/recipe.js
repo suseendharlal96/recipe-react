@@ -33,6 +33,22 @@ const recipeReducer = (state = initState, action) => {
       const a = { ...state };
       const selected = a.recipe.find((data) => data.id === action.key);
       return { ...state, selectedRecipe: selected };
+    case actionType.ADD_RECIPE:
+      console.log(action.recipeData);
+      return {
+        ...state,
+        recipe: state.recipe.concat(action.recipeData),
+      };
+    case actionType.EDIT_RECIPE:
+      console.log(action.index);
+      console.log(action.recipeData);
+      return {
+        ...state,
+        recipe: state.recipe.map((recp, index) =>
+          index === action.index ? action.recipeData : recp
+        ),
+      };
+      break;
     default:
       return state;
   }

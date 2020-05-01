@@ -8,14 +8,21 @@ const RecipeList = (props) => {
   const [active, setActive] = useState(false);
   useEffect(() => {
     console.log(props);
-  }, []);
+    const a = props.location.pathname.split("/")[2];
+    props.recipes.map((recipe, index) => {
+      if (+a === index) {
+        setActive(recipe.id);
+      }
+    });
+  }, [props]);
 
   const selectedHandler = (id) => {
     setActive(id);
   };
 
   const IsActive = (id, props) => {
-    // console.log(props);
+    console.log(active);
+    console.log(id);
     return active === id;
   };
 

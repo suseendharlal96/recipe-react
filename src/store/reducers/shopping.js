@@ -11,6 +11,7 @@ const shopReducer = (state = initState, action) => {
   switch (action.type) {
     case actionType.ADD_INGREDIENT:
       const a = action.ingredient;
+      console.log(a);
       return {
         ...state,
         ingredients: state.ingredients.concat(a),
@@ -29,11 +30,12 @@ const shopReducer = (state = initState, action) => {
         ingredients: updated,
       };
     case actionType.ADD_TO_SHOPLIST:
+      console.log(action.list);
       let arr = [];
       action.list.forEach((data) => {
         arr.push({
           name: data["name"],
-          amount: data["quantity"],
+          amount: data["amount"],
           price: data["price"],
         });
       });
