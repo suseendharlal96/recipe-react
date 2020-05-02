@@ -64,7 +64,7 @@ const RecipeEdit = (props) => {
     } else {
       setNewForm();
     }
-  }, [props.pathname]);
+  }, [props.location.pathname]);
 
   const setNewForm = () => {
     let obj = { ...orderForm };
