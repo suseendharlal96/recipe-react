@@ -33,7 +33,9 @@ const RecipeDetail = (props) => {
       </div>
       <div className="row">
         <div className="col-12">
-          <h1>{detailed && detailed.name ? detailed.name : null}</h1>
+          <h1 style={{ color: " var(--primaryText)" }}>
+            {detailed && detailed.name ? detailed.name : null}
+          </h1>
         </div>
       </div>
       <div className="row">

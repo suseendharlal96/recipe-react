@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 
 import * as action from "../../store/actions/index";
@@ -8,10 +8,6 @@ import RecipeEdit from "./RecipeEdit/RecipeEdit";
 import { Route, Switch } from "react-router-dom";
 
 const Recipes = (props) => {
-  useEffect(() => {
-    console.log(props);
-  }, []);
-
   const addToShoppingHandler = (data) => {
     console.log(data);
     const a = [];
@@ -89,7 +85,14 @@ const Recipes = (props) => {
           />
         )}
       />
-      <Route path="/recipe" render={() => <h2>Please select a recipe!</h2>} />
+      <Route
+        path="/recipe"
+        render={() => (
+          <h2 style={{ color: " var(--primaryText)" }}>
+            Please select a recipe!
+          </h2>
+        )}
+      />
     </Switch>
   );
 

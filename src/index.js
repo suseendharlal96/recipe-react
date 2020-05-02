@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import { createStore, combineReducers } from "redux";
 
 import "./index.css";
+import "./theme.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import shopReducer from "./store/reducers/shopping";

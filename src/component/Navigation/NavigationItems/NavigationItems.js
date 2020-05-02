@@ -8,9 +8,7 @@ const navigationItems = (props) => (
     {/* <NavigationItem link="/" exact>
       Recipe Book
     </NavigationItem> */}
-    <NavigationItem link="/recipe">
-      Recipes
-    </NavigationItem>
+    <NavigationItem link="/recipe">Recipes</NavigationItem>
     <NavigationItem link="/shopping" exact>
       Shopping List
     </NavigationItem>
@@ -20,6 +18,18 @@ const navigationItems = (props) => (
     <NavigationItem link="/fetch" exact>
       Fetch
     </NavigationItem>
+    <button
+      style={{
+        outline: "none",
+        borderRadius: "15px",
+        float: "right",
+        color: " var(--primaryText)",
+        backgroundColor: "var(--primaryBg)",
+      }}
+      onClick={props.changeTheme}
+    >
+      Toggle Theme
+    </button>
   </ul>
 );
 

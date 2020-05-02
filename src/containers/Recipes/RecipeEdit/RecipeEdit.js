@@ -64,7 +64,7 @@ const RecipeEdit = (props) => {
     } else {
       setNewForm();
     }
-  }, [props]);
+  }, [props.pathname]);
 
   const setNewForm = () => {
     let obj = { ...orderForm };
@@ -307,12 +307,14 @@ const RecipeEdit = (props) => {
       })}
       <div className="row">
         <div className="col-12">
-          <img
-            alt="recipe"
-            src={orderForm.imagePath.value}
-            style={{ maxHeight: "150px" }}
-            className="img-responsive"
-          />
+          {orderForm.imagePath.value ? (
+            <img
+              alt="recipe"
+              src={orderForm.imagePath.value}
+              style={{ maxHeight: "150px" }}
+              className="img-responsive"
+            />
+          ) : null}
         </div>
       </div>
       <div className="row">
@@ -328,6 +330,7 @@ const RecipeEdit = (props) => {
                     <div className="col-7">
                       <input
                         type="text"
+                        placeholder="Name"
                         value={ings.name.value}
                         className="form-control"
                         style={
@@ -348,6 +351,7 @@ const RecipeEdit = (props) => {
                     </div>
                     <div className="col-3">
                       <input
+                        placeholder="quantity "
                         type="number"
                         value={ings.amount.value}
                         className="form-control"

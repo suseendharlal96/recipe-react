@@ -17,10 +17,12 @@ const Layout = (props) => {
   return (
     <React.Fragment>
       <Toolbar
+        changeTheme={props.changeTheme}
         drawerToggleClicked={sidebarToggleHandler}
       />
       <SideDrawer
         open={showSideDrawer}
+        changeTheme={props.changeTheme}
         closed={sideDrawerClosedHandler}
       />
       <main className={styles.Content}>{props.children}</main>

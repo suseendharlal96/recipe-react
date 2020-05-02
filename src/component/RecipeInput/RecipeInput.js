@@ -3,7 +3,6 @@ import React from "react";
 import styles from "./RecipeInput.module.css";
 
 const RecipeInput = (props) => {
-
   let inputElement = null;
   const inputClasses = [styles.InputElement];
 
@@ -47,7 +46,11 @@ const RecipeInput = (props) => {
 
   return (
     <div className={styles.Input}>
-      <label className={styles.Label} htmlFor={props.elementConfig.name}>
+      <label
+        className={styles.Label}
+        style={{ color: " var(--primaryText)" }}
+        htmlFor={props.elementConfig.name}
+      >
         {props.label}
       </label>
       <div className="row">{inputElement}</div>
