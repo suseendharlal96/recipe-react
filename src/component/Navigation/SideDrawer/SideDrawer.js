@@ -20,6 +20,7 @@ const sideDrawer = (props) => {
         {/* {user} */}
         <nav>
           <NavigationItems
+            activetheme={props.activetheme}
             changeTheme={props.changeTheme}
             isAuth={props.isAuth}
           />

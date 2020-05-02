@@ -21,6 +21,7 @@ const toolbar = (props) => {
         </div> */}
         <nav className={styles.DesktopOnly}>
           <NavigationItems
+            activetheme={props.activetheme}
             changeTheme={props.changeTheme}
             isAuth={props.isAuth}
           />

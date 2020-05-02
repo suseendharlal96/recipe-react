@@ -20,7 +20,7 @@ const App = (props) => {
   };
   return (
     <Fragment>
-      <Layout changeTheme={toggleTheme}>
+      <Layout changeTheme={toggleTheme} activetheme={theme}>
         <div className="container" style={{ height: "100vh" }}>
           <div className="row">
             <div className="col-md-12">

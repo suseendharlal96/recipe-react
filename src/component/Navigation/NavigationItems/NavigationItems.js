@@ -28,7 +28,7 @@ const navigationItems = (props) => (
       }}
       onClick={props.changeTheme}
     >
-      Toggle Theme
+      {props.activetheme === "light" ? "Dark Mode" : "Light Mode"}
     </button>
   </ul>
 );
