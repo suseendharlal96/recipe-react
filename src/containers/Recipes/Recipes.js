@@ -98,10 +98,12 @@ const Recipes = (props) => {
 
   return (
     <div className="row">
-      <div className="col-md-6">
+      <div className="col-md-6" style={{ marginBottom: "15px" }}>
         <RecipeList {...props} />
       </div>
-      <div className="col-md-6">{recipeDetailComponent}</div>
+      <div className="col-md-6" style={{ marginBottom: "15px" }}>
+        {recipeDetailComponent}
+      </div>
     </div>
   );
 };

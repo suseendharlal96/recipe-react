@@ -273,6 +273,11 @@ const RecipeEdit = (props) => {
     <form onSubmit={submitHandler}>
       <div className="row">
         <div className="col-12">
+          <h3 style={{ color: " var(--primaryText)" }}>
+            {editIndex >= 0 && editIndex !== null
+              ? "Edit Recipe"
+              : "Add Recipe"}
+          </h3>
           <button
             disabled={!formIsValid}
             style={

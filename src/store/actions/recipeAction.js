@@ -1,3 +1,5 @@
+import axios from "axios";
+
 import * as action from "./actionType";
 
 export const getRecipes = () => {
@@ -13,10 +15,22 @@ export const selectedRecipes = (key) => {
   };
 };
 
-export const addRecipe = (data) => {
+const addRecipeToLocal = (data) => {
   return {
     type: action.ADD_RECIPE,
     recipeData: data,
+  };
+};
+
+export const addRecipe = (data) => {
+  return (dispatch) => {
+    axios
+      .post("https://recipe-react-69b9a.firebaseio.com/recipe.json", data)
+      .then((response) => {
+        console.log(response);
+        dispatch(addRecipeToLocal(data));
+      })
+      .catch((err) => console.log(err));
   };
 };
 
