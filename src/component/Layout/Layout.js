@@ -16,17 +16,8 @@ const Layout = (props) => {
   };
   return (
     <React.Fragment>
-      <Toolbar
-        activetheme={props.activetheme}
-        changeTheme={props.changeTheme}
-        drawerToggleClicked={sidebarToggleHandler}
-      />
-      <SideDrawer
-        activetheme={props.activetheme}
-        open={showSideDrawer}
-        changeTheme={props.changeTheme}
-        closed={sideDrawerClosedHandler}
-      />
+      <Toolbar drawerToggleClicked={sidebarToggleHandler} />
+      <SideDrawer open={showSideDrawer} closed={sideDrawerClosedHandler} />
       <main className={styles.Content}>{props.children}</main>
     </React.Fragment>
   );

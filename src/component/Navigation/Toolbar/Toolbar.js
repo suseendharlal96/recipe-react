@@ -2,7 +2,7 @@ import React from "react";
 // import { connect } from "react-redux";
 
 import styles from "./Toolbar.module.css";
-// import Logo from "../../Logo/Logo";
+import Logo from "../../Logo/Logo";
 import NavigationItems from "../NavigationItems/NavigationItems";
 import DrawerToggle from "../SideDrawer/DrawerToggle/DrawerToggle";
 
@@ -16,15 +16,11 @@ const toolbar = (props) => {
       <header className={styles.Toolbar}>
         <DrawerToggle clicked={props.drawerToggleClicked} />
         {/* {user} */}
-        {/* <div className={styles.Logo}>
+        <div className={styles.Logo}>
           <Logo />
-        </div> */}
+        </div>
         <nav className={styles.DesktopOnly}>
-          <NavigationItems
-            activetheme={props.activetheme}
-            changeTheme={props.changeTheme}
-            isAuth={props.isAuth}
-          />
+          <NavigationItems isAuth={props.isAuth} />
         </nav>
       </header>
     </div>

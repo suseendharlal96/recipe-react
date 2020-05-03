@@ -3,6 +3,7 @@ import React from "react";
 import NavigationItems from "../NavigationItems/NavigationItems";
 import styles from "./SideDrawer.module.css";
 import Backdrop from "../../Backdrop/Backdrop";
+import Logo from "../../Logo/Logo";
 
 const sideDrawer = (props) => {
   let attachedClasses = [styles.SideDrawer, styles.Close];
@@ -18,12 +19,11 @@ const sideDrawer = (props) => {
       <Backdrop show={props.open} click={props.closed} />
       <div className={attachedClasses.join(" ")} onClick={props.closed}>
         {/* {user} */}
+        <div className={styles.Logo}>
+          <Logo />
+        </div>
         <nav>
-          <NavigationItems
-            activetheme={props.activetheme}
-            changeTheme={props.changeTheme}
-            isAuth={props.isAuth}
-          />
+          <NavigationItems isAuth={props.isAuth} />
         </nav>
       </div>
     </div>

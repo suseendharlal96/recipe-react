@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
 import * as action from "../../store/actions/index";
@@ -8,6 +8,9 @@ import RecipeEdit from "./RecipeEdit/RecipeEdit";
 import { Route, Switch } from "react-router-dom";
 
 const Recipes = (props) => {
+  useEffect(() => {
+    console.log(props);
+  }, []);
   const addToShoppingHandler = (data) => {
     console.log(data);
     const a = [];
@@ -89,7 +92,9 @@ const Recipes = (props) => {
         path="/recipe"
         render={() => (
           <h2 style={{ color: " var(--primaryText)" }}>
-            Please select a recipe!
+            {props.recipes && props.recipes.length
+              ? "Please select a recipe!"
+              : "Add a recipe!"}
           </h2>
         )}
       />
@@ -108,6 +113,12 @@ const Recipes = (props) => {
   );
 };
 
+const mapStateToProps = (state) => {
+  return {
+    recipes: state.recipeReducer.recipe,
+  };
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
     addToShopping: (data) => dispatch(action.addToShopList(data)),
@@ -117,4 +128,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(Recipes);
+export default connect(mapStateToProps, mapDispatchToProps)(Recipes);
