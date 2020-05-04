@@ -26,7 +26,11 @@ const App = (props) => {
     <Fragment>
       <ThemeContext>
         <Layout>
-          <Suspense fallback={<p>Loading...</p>}>
+          <Suspense
+            fallback={
+              <p style={{ color: " var(--primaryText)" }}>Loading...</p>
+            }
+          >
             <div className="container" style={{ height: "100vh" }}>
               <div className="row">
                 <div className="col-md-12">
