@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
+import { connect } from "react-redux";
 
 import styles from "./NavigationItems.module.css";
 import NavigationItem from "./NavigationItem/NavigationItem";
 import { ThemeContext } from "../../../shared/ThemeContext";
 
-const NavigationItems = () => {
+const NavigationItems = (props) => {
   const { theme } = useContext(ThemeContext);
   const { setTheme } = useContext(ThemeContext);
 
@@ -17,15 +18,29 @@ const NavigationItems = () => {
       document.documentElement.classList.remove("color-theme-in-transition");
     }, 1000);
   };
+
+  let authData = null;
+  if (props.auth) {
+    authData = (
+      <React.Fragment>
+        <NavigationItem link="/recipe">Recipes</NavigationItem>
+        <NavigationItem link="/shopping" exact>
+          Shopping List
+        </NavigationItem>
+      </React.Fragment>
+    );
+  }
   return (
     <ul className={styles.NavigationItems}>
-      {/* <NavigationItem link="/" exact>
-      Recipe Book
-    </NavigationItem> */}
-      <NavigationItem link="/recipe">Recipes</NavigationItem>
-      <NavigationItem link="/shopping" exact>
-        Shopping List
+      <NavigationItem link="/" exact>
+        Home
       </NavigationItem>
+      {authData}
+      {!props.auth ? (
+        <NavigationItem link="/auth">Signup/SignIn</NavigationItem>
+      ) : (
+        <NavigationItem link="/logout">Logout</NavigationItem>
+      )}
       <button
         style={{
           outline: "none",
@@ -42,4 +57,10 @@ const NavigationItems = () => {
   );
 };
 
-export default NavigationItems;
+const mapStateToProps = (state) => {
+  return {
+    auth: state.authReducer.idToken !== null,
+  };
+};
+
+export default connect(mapStateToProps)(NavigationItems);

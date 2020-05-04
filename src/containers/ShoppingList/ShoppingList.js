@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import * as action from "../../store/actions/index";
 
@@ -55,26 +56,39 @@ const ShoppingList = (props) => {
       })}
     </React.Fragment>
   );
-  return (
-    <div className="row">
-      <div className="col-10">
-        <ShoppingEdit
-          selectedRecipe={recipe}
-          clearForm={clearShopForm}
-          addIngredients={(data) => addIngredientsHandler(data)}
-          editIngredient={(data, index) => editIngredientHandler(data, index)}
-          deleteIngredient={(index) => deleteIngredientHandler(index)}
-        />
-        <hr />
-        <ul className="list-group">{ingredients}</ul>
-      </div>
+
+  let shoppingComponent = (
+    <div>
+      <p>Please login to continue..</p>
+      <NavLink to="/auth">Click to login!</NavLink>
     </div>
   );
+
+  if (props.auth) {
+    shoppingComponent = (
+      <div className="row">
+        <div className="col-10">
+          <ShoppingEdit
+            selectedRecipe={recipe}
+            clearForm={clearShopForm}
+            addIngredients={(data) => addIngredientsHandler(data)}
+            editIngredient={(data, index) => editIngredientHandler(data, index)}
+            deleteIngredient={(index) => deleteIngredientHandler(index)}
+          />
+          <hr />
+          <ul className="list-group">{ingredients}</ul>
+        </div>
+      </div>
+    );
+  }
+
+  return shoppingComponent;
 };
 
 const mapStateToProps = (state) => {
   return {
     ingredients: state.shopReducer.ingredients,
+    auth: state.authReducer.idToken !== null,
   };
 };
 

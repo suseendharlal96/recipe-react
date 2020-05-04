@@ -1,42 +1,59 @@
-import React, { Fragment } from "react";
+import React, { Fragment, Suspense } from "react";
 import { Route } from "react-router-dom";
+import { connect } from "react-redux";
 
 import "./App.css";
-import Recipes from "./containers/Recipes/Recipes";
-import ShoppingList from "./containers/ShoppingList/ShoppingList";
 import Layout from "./component/Layout/Layout";
 import Home from "./shared/Home";
+import Auth from "./containers/Auth/Auth";
+import Logout from "./containers/Auth/logout/logout";
 import ThemeContext from "./shared/ThemeContext";
 
-const App = () => {
-  // const [theme, setTheme] = useState("light");
-  // const toggleTheme = () => {
-  //   const activetheme = theme === "light" ? "dark" : "light";
-  //   document.documentElement.classList.add("color-theme-in-transition");
-  //   setTheme(activetheme);
-  //   document.documentElement.setAttribute("data-theme", activetheme);
-  //   window.setTimeout(() => {
-  //     document.documentElement.classList.remove("color-theme-in-transition");
-  //   }, 1000);
-  // };
+const LazyRecipe = React.lazy(() => {
+  return import("./containers/Recipes/Recipes");
+});
+
+const LazyShop = React.lazy(() => {
+  return import("./containers/ShoppingList/ShoppingList");
+});
+
+const App = (props) => {
+  let authData = null;
+  if (props.auth !== null) {
+    authData = <React.Fragment></React.Fragment>;
+  }
   return (
     <Fragment>
       <ThemeContext>
         <Layout>
-          <div className="container" style={{ height: "100vh" }}>
-            <div className="row">
-              <div className="col-md-12">
-                <Route path="/" exact component={Home} />
-                <Route path="/recipe" component={Recipes} />
-                <Route path="/shopping" component={ShoppingList} />
-                {/* <button onClick={toggleTheme}>Theme</button> */}
+          <Suspense fallback={<p>Loading...</p>}>
+            <div className="container" style={{ height: "100vh" }}>
+              <div className="row">
+                <div className="col-md-12">
+                  <Route path="/" exact component={Home} />
+                  <Route path="/auth" component={Auth} />
+                  <Route path="/logout" component={Logout} />
+                  <Route
+                    path="/recipe"
+                    render={(props) => <LazyRecipe {...props} />}
+                  />
+                  <Route
+                    path="/shopping"
+                    render={(props) => <LazyShop {...props} />}
+                  />
+                </div>
               </div>
             </div>
-          </div>
+          </Suspense>
         </Layout>
       </ThemeContext>
     </Fragment>
   );
 };
+const mapStateToProps = (state) => {
+  return {
+    auth: state.authReducer.idToken,
+  };
+};
 
-export default App;
+export default connect(mapStateToProps)(App);

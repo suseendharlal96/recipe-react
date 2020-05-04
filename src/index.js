@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import thunk  from "redux-thunk";
+import thunk from "redux-thunk";
 import { createStore, combineReducers, applyMiddleware } from "redux";
 
 import "./index.css";
@@ -11,10 +11,12 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import shopReducer from "./store/reducers/shopping";
 import recipeReducer from "./store/reducers/recipe";
+import authReducer from "./store/reducers/auth";
 
 const rootReducer = combineReducers({
   recipeReducer: recipeReducer,
   shopReducer: shopReducer,
+  authReducer: authReducer,
 });
 
 const store = createStore(rootReducer, applyMiddleware(thunk));

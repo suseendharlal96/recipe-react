@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 
 import * as action from "../../store/actions/index";
@@ -100,22 +101,32 @@ const Recipes = (props) => {
       />
     </Switch>
   );
-
-  return (
-    <div className="row">
-      <div className="col-md-6" style={{ marginBottom: "15px" }}>
-        <RecipeList {...props} />
-      </div>
-      <div className="col-md-6" style={{ marginBottom: "15px" }}>
-        {recipeDetailComponent}
-      </div>
+  let recipeComponent = (
+    <div>
+      <p>Please login to continue..</p>
+      <NavLink to="/auth">Click to login!</NavLink>
     </div>
   );
+  if (props.auth) {
+    recipeComponent = (
+      <div className="row">
+        <div className="col-md-6" style={{ marginBottom: "15px" }}>
+          <RecipeList {...props} />
+        </div>
+        <div className="col-md-6" style={{ marginBottom: "15px" }}>
+          {recipeDetailComponent}
+        </div>
+      </div>
+    );
+  }
+
+  return recipeComponent;
 };
 
 const mapStateToProps = (state) => {
   return {
     recipes: state.recipeReducer.recipe,
+    auth: state.authReducer.idToken !== null,
   };
 };
 

@@ -2,6 +2,7 @@
   border: none;
   background-color: transparent;
   outline: none;
+  color: var(--primaryText);
   cursor: pointer;
   font: inherit;
   padding: 10px;
