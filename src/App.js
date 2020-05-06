@@ -18,6 +18,8 @@ const LazyShop = React.lazy(() => {
 });
 
 const App = (props) => {
+ 
+
   let authData = null;
   if (props.auth !== null) {
     authData = <React.Fragment></React.Fragment>;

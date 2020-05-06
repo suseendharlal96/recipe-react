@@ -25,8 +25,10 @@ export const authInit = () => {
 };
 
 export const logout = () => {
+  localStorage.removeItem("email");
   return {
     type: actionType.AUTH_LOGOUT,
+
   };
 };
 
@@ -61,6 +63,7 @@ export const authStart = (isSignup, data, routeData) => {
         console.log(res);
         console.log(res.data);
         dispatch(loginSuccess(res.data, loginData.email));
+        localStorage.setItem("email", loginData.email);
         dispatch(authLogout(res.data));
         routeData.history.replace("/recipe");
       })

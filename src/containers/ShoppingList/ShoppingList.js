@@ -88,7 +88,9 @@ const ShoppingList = (props) => {
 const mapStateToProps = (state) => {
   return {
     ingredients: state.shopReducer.ingredients,
-    auth: state.authReducer.idToken !== null,
+    auth:
+      state.authReducer.idToken !== null ||
+      localStorage.getItem("email") !== null,
   };
 };
 

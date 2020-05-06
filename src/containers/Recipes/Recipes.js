@@ -11,6 +11,7 @@ import { Route, Switch } from "react-router-dom";
 const Recipes = (props) => {
   useEffect(() => {
     console.log(props);
+    console.log(localStorage.getItem("email"));
   }, []);
   const addToShoppingHandler = (data) => {
     console.log(data);
@@ -126,7 +127,9 @@ const Recipes = (props) => {
 const mapStateToProps = (state) => {
   return {
     recipes: state.recipeReducer.recipe,
-    auth: state.authReducer.idToken !== null,
+    auth:
+      state.authReducer.idToken !== null ||
+      localStorage.getItem("email") !== null,
   };
 };
 

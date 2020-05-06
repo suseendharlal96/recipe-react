@@ -9,8 +9,20 @@ const NavigationItems = (props) => {
   const { theme } = useContext(ThemeContext);
   const { setTheme } = useContext(ThemeContext);
 
+  useEffect(() => {
+    console.log(theme);
+    const activetheme = localStorage.getItem("theme");
+    document.documentElement.classList.add("color-theme-in-transition");
+    setTheme(activetheme);
+    document.documentElement.setAttribute("data-theme", activetheme);
+    window.setTimeout(() => {
+      document.documentElement.classList.remove("color-theme-in-transition");
+    }, 1000);
+  }, []);
+
   const changeTheme = () => {
     const activetheme = theme === "light" ? "dark" : "light";
+    localStorage.setItem("theme", activetheme);
     document.documentElement.classList.add("color-theme-in-transition");
     setTheme(activetheme);
     document.documentElement.setAttribute("data-theme", activetheme);
@@ -59,7 +71,9 @@ const NavigationItems = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    auth: state.authReducer.idToken !== null,
+    auth:
+      state.authReducer.idToken !== null ||
+      localStorage.getItem("email") !== null,
   };
 };
 
