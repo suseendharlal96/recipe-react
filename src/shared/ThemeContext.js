@@ -13,8 +13,8 @@ const ThemeProvider = (props) => {
       setTheme("light");
     }
     setTimeout(() => {
-      localStorage.clear();
-    }, 2000);
+      localStorage.removeItem("email");
+    }, 3600000);
   }, []);
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
