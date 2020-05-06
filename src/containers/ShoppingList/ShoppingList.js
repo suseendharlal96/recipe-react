@@ -59,8 +59,8 @@ const ShoppingList = (props) => {
 
   let shoppingComponent = (
     <div>
-      <p>Please login to continue..</p>
-      <NavLink to="/auth">Click to login!</NavLink>
+      <p style={{ color: " var(--primaryText)" }}>Please login to continue..</p>
+      <NavLink to="/auth">Click here to login!</NavLink>
     </div>
   );
 
